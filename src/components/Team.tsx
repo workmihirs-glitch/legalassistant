@@ -1,0 +1,39 @@
+import teamMember1 from "@/assets/team-member-1.jpg";
+import teamMember2 from "@/assets/team-member-2.jpg";
+import teamMember3 from "@/assets/team-member-3.jpg";
+
+const Team = () => {
+  const team = [
+    { name: "Chidi Eze", role: "Senior Partner, Corporate Law", image: teamMember1 },
+    { name: "Samira Hadid", role: "Civil Litigation Expert", image: teamMember2 },
+    { name: "Francois Mercer", role: "Family Law Specialist", image: teamMember3 },
+  ];
+
+  return (
+    <section className="py-20 bg-darker-bg">
+      <div className="container mx-auto px-6">
+        <h2 className="font-playfair text-5xl font-bold text-accent mb-12">Our Team</h2>
+        
+        <div className="grid grid-cols-3 gap-8">
+          {team.map((member, index) => (
+            <div key={index} className="space-y-4">
+              <div className="rounded-2xl overflow-hidden border-2 border-accent">
+                <img 
+                  src={member.image} 
+                  alt={member.name} 
+                  className="w-full h-80 object-cover"
+                />
+              </div>
+              <div>
+                <h3 className="text-foreground text-xl font-semibold mb-1">{member.name}</h3>
+                <p className="text-accent text-sm">{member.role}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Team;
