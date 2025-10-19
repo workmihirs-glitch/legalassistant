@@ -1,6 +1,10 @@
 import heroGavel from "@/assets/hero-gavel.jpg";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const Hero = () => {
+  const { ref: textRef, isVisible: textVisible } = useScrollAnimation(0.3);
+  const { ref: titleRef, isVisible: titleVisible } = useScrollAnimation(0.3);
+
   return (
     <section id="hero" className="min-h-screen flex items-center relative overflow-hidden pt-20">
       <div className="absolute inset-0 grid grid-cols-2">
@@ -19,7 +23,12 @@ const Hero = () => {
       
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-2 gap-12 items-center">
-          <div className="flex items-center justify-center">
+          <div 
+            ref={textRef}
+            className={`flex items-center justify-center transition-all duration-1000 ${
+              textVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+          >
             <div className="border border-accent rounded-lg p-8 bg-background/80 backdrop-blur-sm">
               <p className="text-accent text-lg leading-relaxed">
                 Providing expert legal<br />
@@ -30,7 +39,12 @@ const Hero = () => {
             </div>
           </div>
           
-          <div className="space-y-8">
+          <div 
+            ref={titleRef}
+            className={`space-y-8 transition-all duration-1000 delay-300 ${
+              titleVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+            }`}
+          >
             <div>
               <h1 className="font-playfair text-8xl font-bold leading-tight">
                 <span className="text-foreground">Law</span>

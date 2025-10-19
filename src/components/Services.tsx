@@ -1,6 +1,8 @@
 import servicesImage from "@/assets/services-image.jpg";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const Services = () => {
+  const { ref: serviceRef, isVisible: serviceVisible } = useScrollAnimation(0.2);
   const services = [
     { title: "Corporate Law", description: "Business formation, compliance, contracts" },
     { title: "Civil Litigation", description: "Dispute resolution, claims" },
@@ -14,7 +16,12 @@ const Services = () => {
       
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-2 gap-12 items-start">
-          <div className="space-y-8 sticky top-32">
+          <div 
+            ref={serviceRef}
+            className={`space-y-8 sticky top-32 transition-all duration-1000 ${
+              serviceVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+            }`}
+          >
             <div>
               <div className="border border-accent rounded-lg px-6 py-3 inline-block mb-6">
                 <span className="text-accent font-medium">Our Services</span>

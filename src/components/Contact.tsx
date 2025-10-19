@@ -1,10 +1,18 @@
 import { Button } from "@/components/ui/button";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const Contact = () => {
+  const { ref: contactRef, isVisible: contactVisible } = useScrollAnimation(0.3);
+
   return (
     <section className="py-20 bg-darker-bg">
       <div className="container mx-auto px-6">
-        <div className="max-w-4xl mx-auto text-center space-y-8">
+        <div 
+          ref={contactRef}
+          className={`max-w-4xl mx-auto text-center space-y-8 transition-all duration-1000 ${
+            contactVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}
+        >
           <h2 className="font-playfair text-6xl font-bold leading-tight">
             <span className="text-foreground">Get in Touch</span>
             <br />

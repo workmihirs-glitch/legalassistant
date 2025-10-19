@@ -1,8 +1,10 @@
 import teamMember1 from "@/assets/team-member-1.jpg";
 import teamMember2 from "@/assets/team-member-2.jpg";
 import teamMember3 from "@/assets/team-member-3.jpg";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const Team = () => {
+  const { ref: teamRef, isVisible: teamVisible } = useScrollAnimation(0.2);
   const team = [
     { name: "Chidi Eze", role: "Senior Partner, Corporate Law", image: teamMember1 },
     { name: "Samira Hadid", role: "Civil Litigation Expert", image: teamMember2 },
@@ -14,9 +16,18 @@ const Team = () => {
       <div className="container mx-auto px-6">
         <h2 className="font-playfair text-5xl font-bold text-accent mb-12">Our Team</h2>
         
-        <div className="grid grid-cols-3 gap-8">
+        <div 
+          ref={teamRef}
+          className="grid grid-cols-3 gap-8"
+        >
           {team.map((member, index) => (
-            <div key={index} className="space-y-4">
+            <div 
+              key={index} 
+              className={`space-y-4 transition-all duration-700 ${
+                teamVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              }`}
+              style={{ transitionDelay: `${index * 200}ms` }}
+            >
               <div className="rounded-2xl overflow-hidden border-2 border-accent">
                 <img 
                   src={member.image} 

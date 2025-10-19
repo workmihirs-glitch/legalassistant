@@ -1,6 +1,10 @@
 import teamPhoto from "@/assets/team-photo.jpg";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const About = () => {
+  const { ref: titleRef, isVisible: titleVisible } = useScrollAnimation(0.2);
+  const { ref: imageRef, isVisible: imageVisible } = useScrollAnimation(0.2);
+
   return (
     <section id="about" className="min-h-screen py-20 relative">
       <div className="absolute top-0 right-0 w-1/3 h-full">
@@ -10,7 +14,12 @@ const About = () => {
       
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-2 gap-12 items-center">
-          <div className="space-y-8">
+          <div 
+            ref={titleRef}
+            className={`space-y-8 transition-all duration-1000 ${
+              titleVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+            }`}
+          >
             <div>
               <h2 className="font-playfair text-6xl font-bold leading-tight mb-4">
                 <span className="text-foreground italic">Experienced</span>
@@ -26,7 +35,12 @@ const About = () => {
             </p>
           </div>
           
-          <div className="space-y-6">
+          <div 
+            ref={imageRef}
+            className={`space-y-6 transition-all duration-1000 delay-300 ${
+              imageVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+            }`}
+          >
             <div className="rounded-2xl overflow-hidden border-2 border-accent">
               <img 
                 src={teamPhoto} 
