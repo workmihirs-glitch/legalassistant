@@ -46,8 +46,11 @@ const Services = () => {
             
             <div className="grid grid-cols-2 gap-6">
               {services.map((service, index) => (
-                <div key={index} className="space-y-2">
-                  <div className="border-b border-accent pb-3">
+                <div 
+                  key={index} 
+                  className="space-y-2 p-6 rounded-xl bg-gradient-to-br from-background/50 to-background/30 backdrop-blur-lg border border-accent/20 hover:border-accent hover:scale-105 transition-all duration-300 cursor-pointer hover:shadow-[0_0_30px_rgba(212,175,55,0.2)] group"
+                >
+                  <div className="border-b border-accent pb-3 group-hover:border-accent/80 transition-colors">
                     <h3 className="text-accent font-semibold text-lg">{service.title}</h3>
                   </div>
                   <p className="text-foreground/70 text-sm">{service.description}</p>

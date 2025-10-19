@@ -29,7 +29,7 @@ const Hero = () => {
               textVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
           >
-            <div className="border border-accent rounded-lg p-8 bg-background/80 backdrop-blur-sm">
+            <div className="border border-accent rounded-lg p-8 bg-gradient-to-br from-background/90 to-background/70 backdrop-blur-xl shadow-[0_0_50px_rgba(212,175,55,0.2)]">
               <p className="text-accent text-lg leading-relaxed">
                 Providing expert legal<br />
                 solutions with<br />
