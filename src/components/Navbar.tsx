@@ -1,7 +1,10 @@
 import { Landmark } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -43,9 +46,9 @@ const Navbar = () => {
             <Button 
               variant="outline" 
               className="border-accent text-accent hover:bg-accent hover:text-accent-foreground"
-              onClick={() => window.open('#', '_blank')}
+              onClick={() => navigate('/auth')}
             >
-              Try Agent
+              Login
             </Button>
           </div>
         </div>
