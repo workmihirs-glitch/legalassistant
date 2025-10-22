@@ -44,15 +44,13 @@ const Navbar = () => {
               Service
             </button>
             <Button 
-              variant="outline" 
-              className="border-accent text-accent hover:bg-accent hover:text-accent-foreground"
+              variant="glass"
               onClick={() => navigate('/legal-agent')}
             >
               Try Agent
             </Button>
             <Button 
-              variant="outline" 
-              className="border-accent text-accent hover:bg-accent hover:text-accent-foreground"
+              variant="glass"
               onClick={() => navigate('/auth')}
             >
               Login

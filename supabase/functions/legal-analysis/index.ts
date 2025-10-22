@@ -61,6 +61,12 @@ serve(async (req) => {
     });
 
     const prosecutionData = await prosecutionResponse.json();
+    
+    if (!prosecutionData.choices || !prosecutionData.choices[0]) {
+      console.error('Invalid prosecution response:', prosecutionData);
+      throw new Error('Failed to get prosecution analysis');
+    }
+    
     const prosecutionAnalysis = prosecutionData.choices[0].message.content;
 
     // Get defense analysis
@@ -86,6 +92,12 @@ serve(async (req) => {
     });
 
     const defenseData = await defenseResponse.json();
+    
+    if (!defenseData.choices || !defenseData.choices[0]) {
+      console.error('Invalid defense response:', defenseData);
+      throw new Error('Failed to get defense analysis');
+    }
+    
     const defenseAnalysis = defenseData.choices[0].message.content;
 
     // Get final verdict with probability
@@ -111,6 +123,12 @@ serve(async (req) => {
     });
 
     const verdictData = await verdictResponse.json();
+    
+    if (!verdictData.choices || !verdictData.choices[0]) {
+      console.error('Invalid verdict response:', verdictData);
+      throw new Error('Failed to get verdict analysis');
+    }
+    
     const verdict = verdictData.choices[0].message.content;
 
     return new Response(

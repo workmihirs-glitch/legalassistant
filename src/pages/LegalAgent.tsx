@@ -181,57 +181,58 @@ const LegalAgent = () => {
               uploadVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
           >
-            <Card className="backdrop-blur-md bg-card/50 border-accent/20 shadow-lg">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Upload className="w-6 h-6 text-accent" />
-                  Upload Case Document
-                </CardTitle>
-                <CardDescription>
-                  Upload a PDF or image file containing the case details
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div className="flex items-center gap-4">
-                    <input
-                      type="file"
-                      accept=".pdf,image/*"
-                      onChange={handleFileChange}
-                      className="flex-1 text-sm text-muted-foreground file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-accent file:text-accent-foreground hover:file:bg-accent/90"
-                    />
-                    <Button
-                      onClick={analyzeCase}
-                      disabled={!file || isAnalyzing}
-                      className="bg-accent hover:bg-accent/90 text-accent-foreground"
-                    >
-                      {isAnalyzing ? (
-                        <>
-                          <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                          Analyzing...
-                        </>
-                      ) : (
-                        <>
-                          <Gavel className="w-4 h-4 mr-2" />
-                          Analyze Case
-                        </>
-                      )}
-                    </Button>
-                  </div>
-                  {file && (
-                    <p className="text-sm text-muted-foreground">
-                      Selected: {file.name}
-                    </p>
-                  )}
-                  <div className="flex items-start gap-2 p-3 rounded-lg bg-amber-500/10 border border-amber-500/20">
-                    <AlertCircle className="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" />
-                    <p className="text-sm text-amber-500">
-                      This AI assistant only responds to legal questions and analyzes cases based on Indian law system.
-                    </p>
-                  </div>
+          <Card className="glass backdrop-blur-md border-white/10 shadow-lg">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Upload className="w-6 h-6 text-accent" />
+                Upload Case Document
+              </CardTitle>
+              <CardDescription>
+                Upload a PDF or image file containing the case details
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div className="flex items-center gap-4">
+                  <input
+                    type="file"
+                    accept=".pdf,image/*"
+                    onChange={handleFileChange}
+                    className="flex-1 text-sm text-muted-foreground file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:glass file:text-foreground hover:file:glass-strong"
+                  />
+                  <Button
+                    onClick={analyzeCase}
+                    disabled={!file || isAnalyzing}
+                    variant="glass"
+                    size="lg"
+                  >
+                    {isAnalyzing ? (
+                      <>
+                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                        Analyzing...
+                      </>
+                    ) : (
+                      <>
+                        <Gavel className="w-4 h-4 mr-2" />
+                        Analyze Case
+                      </>
+                    )}
+                  </Button>
                 </div>
-              </CardContent>
-            </Card>
+                {file && (
+                  <p className="text-sm text-muted-foreground">
+                    Selected: {file.name}
+                  </p>
+                )}
+                <div className="flex items-start gap-2 p-3 rounded-lg bg-amber-500/10 border border-amber-500/20">
+                  <AlertCircle className="w-5 h-5 text-amber-500 mt-0.5 flex-shrink-0" />
+                  <p className="text-sm text-amber-500">
+                    This AI assistant only responds to legal questions and analyzes cases based on Indian law system.
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
           </div>
         </div>
 
@@ -240,7 +241,7 @@ const LegalAgent = () => {
           <div className="container mx-auto px-6 pb-12 space-y-8">
             {/* Prosecution Analysis */}
             {prosecutionAnalysis && (
-              <Card className="backdrop-blur-md bg-card/50 border-red-500/20 shadow-lg animate-fade-in">
+              <Card className="glass backdrop-blur-md border-red-500/20 shadow-lg animate-fade-in">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-red-500">
                     <Gavel className="w-6 h-6" />
@@ -257,7 +258,7 @@ const LegalAgent = () => {
 
             {/* Defense Analysis */}
             {defenseAnalysis && (
-              <Card className="backdrop-blur-md bg-card/50 border-blue-500/20 shadow-lg animate-fade-in">
+              <Card className="glass backdrop-blur-md border-blue-500/20 shadow-lg animate-fade-in">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-blue-500">
                     <Scale className="w-6 h-6" />
@@ -274,7 +275,7 @@ const LegalAgent = () => {
 
             {/* Verdict */}
             {verdict && parsedVerdict && (
-              <Card className="backdrop-blur-md bg-card/50 border-accent shadow-lg animate-fade-in">
+              <Card className="glass backdrop-blur-md border-accent/30 shadow-lg animate-fade-in">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-accent">
                     <Gavel className="w-6 h-6" />

@@ -32,9 +32,9 @@ All colors MUST be HSL.
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 45 90% 51%;
+    --border: 0 0% 20%;
     --input: 0 0% 20%;
-    --ring: 45 90% 51%;
+    --ring: 0 0% 30%;
 
     --radius: 0.5rem;
     
@@ -42,6 +42,11 @@ All colors MUST be HSL.
     --gold-dim: 45 50% 40%;
     --dark-bg: 0 0% 7%;
     --darker-bg: 0 0% 5%;
+    
+    /* Liquid glass effects */
+    --glass-bg: 0 0% 10%;
+    --glass-border: 0 0% 25%;
+    --glass-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.05);
 
     --sidebar-background: 0 0% 98%;
 
@@ -106,5 +111,23 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  }
+  
+  .glass-strong {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(30px) saturate(200%);
+    -webkit-backdrop-filter: blur(30px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   }
 }
