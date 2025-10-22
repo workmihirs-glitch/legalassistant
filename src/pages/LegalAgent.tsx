@@ -45,8 +45,14 @@ const LegalAgent = () => {
       reader.onload = async (e) => {
         try {
           const typedarray = new Uint8Array(e.target?.result as ArrayBuffer);
-          // For simplicity, we'll send the PDF as base64 to the AI which can read it
-          const base64 = btoa(String.fromCharCode(...typedarray));
+          // Process in chunks to avoid stack overflow
+          let binary = '';
+          const chunkSize = 8192;
+          for (let i = 0; i < typedarray.length; i += chunkSize) {
+            const chunk = typedarray.subarray(i, i + chunkSize);
+            binary += String.fromCharCode.apply(null, Array.from(chunk));
+          }
+          const base64 = btoa(binary);
           resolve(`data:application/pdf;base64,${base64}`);
         } catch (error) {
           reject(error);
