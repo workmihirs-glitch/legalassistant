@@ -46,6 +46,13 @@ const Navbar = () => {
             <Button 
               variant="outline" 
               className="border-accent text-accent hover:bg-accent hover:text-accent-foreground"
+              onClick={() => navigate('/legal-agent')}
+            >
+              Try Agent
+            </Button>
+            <Button 
+              variant="outline" 
+              className="border-accent text-accent hover:bg-accent hover:text-accent-foreground"
               onClick={() => navigate('/auth')}
             >
               Login
