@@ -103,6 +103,7 @@ const LegalAgent = () => {
       });
 
       if (error) throw error;
+      if ((data as any)?.error) throw new Error((data as any).error);
 
       setProsecutionAnalysis(data.prosecution);
       setDefenseAnalysis(data.defense);
