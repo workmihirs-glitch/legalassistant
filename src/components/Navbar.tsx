@@ -1,15 +1,37 @@
 import { Landmark } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { supabase } from "@/integrations/supabase/client";
+import { useEffect, useState } from "react";
+import { Session } from "@supabase/supabase-js";
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const [session, setSession] = useState<Session | null>(null);
+  
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
   
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const getUserInitial = () => {
+    if (!session?.user?.email) return "U";
+    return session.user.email.charAt(0).toUpperCase();
   };
 
   return (
@@ -49,12 +71,26 @@ const Navbar = () => {
             >
               Try Agent
             </Button>
-            <Button 
-              variant="glass"
-              onClick={() => navigate('/auth')}
-            >
-              Login
-            </Button>
+            {session ? (
+              <button
+                onClick={() => navigate('/dashboard')}
+                className="flex items-center gap-2 glass rounded-full px-4 py-2 hover:glass-strong transition-all"
+              >
+                <Avatar className="h-8 w-8">
+                  <AvatarFallback className="bg-accent text-accent-foreground font-bold text-sm">
+                    {getUserInitial()}
+                  </AvatarFallback>
+                </Avatar>
+                <span className="text-foreground text-sm hidden sm:block">{session.user.email}</span>
+              </button>
+            ) : (
+              <Button 
+                variant="glass"
+                onClick={() => navigate('/auth')}
+              >
+                Login
+              </Button>
+            )}
           </div>
         </div>
       </div>

@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Landmark } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import ParticleBackground from "@/components/ParticleBackground";
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -21,7 +22,7 @@ const Auth = () => {
     const checkUser = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (session) {
-        navigate("/");
+        navigate("/dashboard");
       }
     };
     checkUser();
@@ -29,7 +30,7 @@ const Auth = () => {
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (session) {
-        navigate("/");
+        navigate("/dashboard");
       }
     });
 
@@ -56,7 +57,7 @@ const Auth = () => {
           email,
           password,
           options: {
-            emailRedirectTo: `${window.location.origin}/`,
+            emailRedirectTo: `${window.location.origin}/dashboard`,
           },
         });
         if (error) throw error;
@@ -82,7 +83,7 @@ const Auth = () => {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: `${window.location.origin}/`,
+          redirectTo: `${window.location.origin}/dashboard`,
         },
       });
       if (error) throw error;
@@ -97,17 +98,18 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-6">
-      <Card className="w-full max-w-md border-accent/20">
+    <div className="min-h-screen bg-background flex items-center justify-center p-6 relative">
+      <ParticleBackground />
+      <Card className="w-full max-w-md glass relative z-10">
         <CardHeader className="space-y-1">
           <div className="flex items-center justify-center gap-2 mb-4">
             <Landmark className="w-8 h-8 text-accent" />
-            <span className="text-2xl font-bold text-foreground">Wardiere Inc.</span>
+            <span className="text-2xl font-bold text-foreground italic">Wardiere Inc.</span>
           </div>
-          <CardTitle className="text-2xl text-center">
+          <CardTitle className="text-2xl text-center italic">
             {isLogin ? "Welcome back" : "Create an account"}
           </CardTitle>
-          <CardDescription className="text-center">
+          <CardDescription className="text-center italic">
             {isLogin
               ? "Enter your credentials to access your account"
               : "Enter your information to create an account"}
@@ -142,10 +144,11 @@ const Auth = () => {
             </div>
             <Button
               type="submit"
-              className="w-full bg-accent text-accent-foreground hover:bg-accent/90"
+              variant="glass"
+              className="w-full"
               disabled={loading}
             >
-              {loading ? "Please wait..." : isLogin ? "Sign In" : "Sign Up"}
+              <span className="italic">{loading ? "Please wait..." : isLogin ? "Sign In" : "Sign Up"}</span>
             </Button>
           </form>
 
@@ -160,8 +163,8 @@ const Auth = () => {
 
           <Button
             type="button"
-            variant="outline"
-            className="w-full border-accent/20 hover:bg-accent/10"
+            variant="glass"
+            className="w-full"
             onClick={handleGoogleAuth}
             disabled={loading}
           >
@@ -183,16 +186,16 @@ const Auth = () => {
                 d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
               />
             </svg>
-            Continue with Google
+            <span className="italic">Continue with Google</span>
           </Button>
         </CardContent>
         <CardFooter>
-          <p className="text-center w-full text-sm text-muted-foreground">
+          <p className="text-center w-full text-sm text-muted-foreground italic">
             {isLogin ? "Don't have an account? " : "Already have an account? "}
             <button
               type="button"
               onClick={() => setIsLogin(!isLogin)}
-              className="text-accent hover:underline font-medium"
+              className="text-accent hover:underline font-medium italic"
               disabled={loading}
             >
               {isLogin ? "Sign up" : "Sign in"}
